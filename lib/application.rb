@@ -4,14 +4,15 @@ require 'nokogiri'
 
 class Application
 
+  #
   def getApp(url)
-  	cat = []
+  	app_name = []
   	doc = Nokogiri::HTML(open(url))
-    doc.css('strong[@class="i_l_title"]').each do | category | 
-  	  cat << category.content 
+    doc.css('strong[@class="i_l_title"]').each do | appn | 
+  	  app_name << appn.content 
       sleep(1.0/5.0)
     end 
-    return cat
+    return app_name
   end
 
   def get_l_links(base_url, url)
@@ -30,13 +31,3 @@ class Application
     return dhrefs
   end
 end
-
-=begin
-puts "App Names"
-puts Application.new.getApp("http://www.1mobile.com/apps/books_reference/")
-
-puts "App Links"
-puts Application.new.get_l_links("http://www.1mobile.com","http://www.1mobile.com/apps/books_reference/")
-puts "App DLinks"
-puts Application.new.get_d_links("http://www.1mobile.com","http://www.1mobile.com/apps/books_reference/")
-=end

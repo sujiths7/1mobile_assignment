@@ -1,3 +1,4 @@
+require 'io/console'
 load "application.rb"
 load "category.rb"
 load "apps.rb"
@@ -14,7 +15,6 @@ class Main
   app_de_Obj = Apps.new
   db_con_obj = Con_db.new
   
-
   print "Enter URL : "
   base_url = gets.chomp
   base_url.insert(0,"http://") unless base_url.include? "http://"
@@ -23,7 +23,13 @@ class Main
   	exit
   end
 
-  db_con_obj.get_cred()
+  puts "\nMySQL Credentials."
+  print "User name?: "
+  u_name = gets.chomp
+  print "Password?: "
+  passwd = STDIN.noecho(&:gets).chomp
+  puts "  "
+  db_con_obj.connect_sql(u_name,passwd)
   db_con_obj.clear()
 
   #base_url = "http://www.1mobile.com"
@@ -56,7 +62,6 @@ class Main
       app_desc_tmp = app_desc[0]
       app_desc_tmp.to_s.gsub!("'","")
 
-
       #getting cat_id for application_tab
       app_id_rec =  db_con_obj.db("select * from category_tab where name = '#{cat_names[cat_index]}'")
       app_id_rec.each(:cache_rows => false) do |record| 
@@ -75,11 +80,9 @@ class Main
       app_screens.each do |img_link|
         db_con_obj.db("INSERT INTO screenshots_tab VALUES ('','#{img_link}','#{$appl_id}')")
       end
-
       app_index += 1
       break if app_index == 5
     end
-
     cat_index += 1
   end
   puts "\n<< RIPPING COMPLETED >>"

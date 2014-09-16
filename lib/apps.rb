@@ -4,13 +4,13 @@ require 'nokogiri'
 
 class Apps
   def getDesc(url)
-  	cat = []
+  	descript = []
   	doc = Nokogiri::HTML(open(url))
-    doc.css('div[@class="d_b_cnt"]').each do | category | 
-  	  cat << category.content 
+    doc.css('div[@class="d_b_cnt"]').each do | descp | 
+  	  descript << descp.content 
   	  sleep(1.0/5.0)
     end 
-    return cat
+    return descript
   end
 
   def getPics(url)
