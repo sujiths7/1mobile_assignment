@@ -27,11 +27,11 @@ class Main
   cat_links = cat_Obj.get_c_link(base_url)
   cat_index = 0
 
-  puts "Extracting Categories"
+  puts "\n<<<<<<<<<<RIPPING>>>>>>>>>>"
 
   cat_links.each do | links |
 
-    puts "Category No:#{cat_index} " 
+    puts "\n  #{cat_index + 1}. " + cat_names[cat_index] 
     #feeding category_tab
     db_con_obj.db("INSERT INTO category_tab VALUES ('','#{cat_names[cat_index]}')");
     
@@ -43,7 +43,7 @@ class Main
     app_index = 0
     app_links.each do | alink |
 
-      puts "App No:#{app_index} "
+      puts "    #{app_index + 1}. " + app_names[app_index]
 
       app_name_tmp = app_names[app_index]
       app_name_tmp.to_s.gsub!("'","")
