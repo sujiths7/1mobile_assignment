@@ -27,7 +27,7 @@ class Main
   cat_links = cat_Obj.get_c_link(base_url)
   cat_index = 0
 
-  puts "\n<<<<<<<<<<RIPPING>>>>>>>>>>"
+  puts "\n<< RIPPING >>"
 
   cat_links.each do | links |
 
@@ -78,4 +78,5 @@ class Main
 
     cat_index += 1
   end
+  puts "<< RIPPING COMPLETED >>"
 end
