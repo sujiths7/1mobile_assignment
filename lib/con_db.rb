@@ -1,8 +1,17 @@
 require "mysql2"
+require 'io/console'
 
 class Con_db
-
-  $con = Mysql2::Client.new(:host =>"localhost", :username =>"root", :password =>"root", :database =>"1mobile_db")
+  
+  def get_cred()
+    puts "\nMySQL Credentials."
+    print "User name?: "
+    u_name = gets.chomp
+    print "Password?: "
+    passwd = STDIN.noecho(&:gets).chomp
+    $con = Mysql2::Client.new(:host =>"localhost", :username =>u_name, :password =>passwd, :database =>"1mobile_db")
+    puts "  "
+  end
 
   def db(strq)
   	$con.query(strq)

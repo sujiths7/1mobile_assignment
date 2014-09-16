@@ -13,15 +13,19 @@ class Main
   app_Obj = Application.new
   app_de_Obj = Apps.new
   db_con_obj = Con_db.new
-  db_con_obj.clear()
+  
 
-  puts "Enter URL : "
+  print "Enter URL : "
   base_url = gets.chomp
   base_url.insert(0,"http://") unless base_url.include? "http://"
   unless cURL.isURL(base_url)
   	puts "Check URL or internet connection "
   	exit
   end
+
+  db_con_obj.get_cred()
+  db_con_obj.clear()
+
   #base_url = "http://www.1mobile.com"
   cat_names = cat_Obj.getCat(base_url)
   cat_links = cat_Obj.get_c_link(base_url)
@@ -78,5 +82,5 @@ class Main
 
     cat_index += 1
   end
-  puts "<< RIPPING COMPLETED >>"
+  puts "\n<< RIPPING COMPLETED >>"
 end
